@@ -5,7 +5,6 @@ include '../model/cart_model.php';
 
 // TO ADD ITEM IN CART
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
     if (isset($_POST['cart_btn'])) {
         $user_id = $_POST['user_id'];
         $product_id = $_POST['product_id'];
@@ -91,7 +90,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 
-
 // TO DELETE A WISHLIST ITEM
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['remove_wishlist_btn'])) {
@@ -125,7 +123,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $set_val = " size='$size',quantity='$quantity'";
             $condition_1 = "product_id = $product_id";
             $update_cart_product = updateSizeAndQuantity($table, $set_val, $condition_1);
-
             if ($update_cart_product) {
                 $_SESSION['size_and_quantity_success'] = "Product Information Updated";
                 header("Location: ../view/cart.php");
@@ -136,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 exit;
             }
         } else {
-            $_SESSION['size_and_quantity_fail'] = "Please select both fields";
+            $_SESSION['size_and_quantity_fail'] = "Please select relevant field";
             header("Location: ../view/cart.php");
             exit;
         }

@@ -161,13 +161,11 @@ if (isset($_SESSION['user_login'])) {
                 } else {
                   echo "No image_id found in products_cart for user_id: $user_id";
                 }
-
                 ?>
                 <div class="card rounded-0 mb-3">
                   <div class="card-body">
                     <div class="d-flex flex-column flex-lg-row gap-3">
                       <div class="product-img">
-
                         <a href="./product-details.php?product_id=<?php echo $product_id ?>">
                           <!-- <img src='<?php //echo "../../shopingo_admin2-rahul/assets/images/product_image/$images_cart" ?>'
                             class="" height="180px" width="170px" alt="."> -->
@@ -193,31 +191,11 @@ if (isset($_SESSION['user_login'])) {
                         </div>
 
                         <div class="mt-3 hstack gap-2">
-                          <!-- Product Size -->
-                          <!-- <button type="button" class="btn btn-sm btn-light border rounded-0" data-bs-toggle="modal"
-                            data-bs-target="#SizeModal<?= $product_id ?>">Size : M</button> -->
-                          <!-- Product Quantity -->
-                          <!-- <button type="button" class="btn btn-sm btn-light border rounded-0" data-bs-toggle="modal"
-                            data-bs-target="#QtyModal">Qty : 1</button> -->
-
-
-
                           <!-- PRODUCT SIZE AND QUANTITY -->
                           <form action="../controller/cart_handle.php" id="sizeAndQuantityForm" method="POST">
                             <div class="container">
                               <div class="row text-left justify-content-left ">
-                                <!-- fetch data of size and quantity of product -->
-                                <?php $query = "SELECT * FROM `products_cart` WHERE product_id = $product_id AND user_id = $user_id";
-                                $execute = mysqli_query($conn, $query);
-                                $data_container_cart = array();
-                                while ($row = mysqli_fetch_assoc($execute)) {
-                                  $data_container_cart[] = $row;
-                                }
-                                foreach ($data_container_cart as $data_cart):
-                                  $product_size = $data_cart['size'];
-                                  $product_quantity = $data_cart['quantity'];
-                                endforeach;
-                                ?>
+
                                 <!-- Product Size -->
                                 <div class="col-md-5">
                                   <label for="">select size</label>
@@ -230,15 +208,26 @@ if (isset($_SESSION['user_login'])) {
                                       </option>
                                     <?php endforeach; ?>
                                   </select>
-                                  <span class="error-sizeAndQuantityForm" id="sizeError">
 
-                                    <!-- temporary display of data size -->
-                                    <div class="container">
-                                      <div class="row">
-                                        (
-                                        <?php echo $product_size ?>)
-                                      </div>
+                                  <!-- fetch data of size and quantity of product -->
+                                  <?php $query = "SELECT * FROM `products_cart` WHERE product_id = $product_id AND user_id = $user_id";
+                                  $execute = mysqli_query($conn, $query);
+                                  $data_container_cart = array();
+                                  while ($row = mysqli_fetch_assoc($execute)) {
+                                    $data_container_cart[] = $row;
+                                  }
+                                  foreach ($data_container_cart as $data_cart):
+                                    $product_size = $data_cart['size'];
+                                    $product_quantity = $data_cart['quantity'];
+                                  endforeach;
+                                  ?>
+                                  <!-- display of data size -->
+                                  <div class="container">
+                                    <div class="row">
+                                      (
+                                      <?php echo $product_size ?>)
                                     </div>
+                                  </div>
                                 </div>
 
                                 <!-- Product Quantity -->
@@ -248,12 +237,11 @@ if (isset($_SESSION['user_login'])) {
                                     value="<?php echo $product_quantity; ?>" placeholder="enter quantity">
                                   <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
                                 </div>
-                                <span class="error-sizeAndQuantityForm" id="quantityError">
 
-                                  <div class="col-md-2">
-                                    <button class="mt-4 btn btn-sm btn-dark border rounded-0"
-                                      name="updatesize_quantity">save</button>
-                                  </div>
+                                <div class="col-md-2">
+                                  <button class="mt-4 btn btn-sm btn-dark border rounded-0"
+                                    name="updatesize_quantity">save</button>
+                                </div>
                               </div>
                             </div>
                           </form>
@@ -736,7 +724,7 @@ if (isset($_SESSION['user_login'])) {
 
 
   <!-- JavaScript files -->
-  <script>
+  <!-- <script>
     document.getElementById('sizeAndQuantityForm').addEventListener('submit', function (e) {
       e.preventDefault();
       let valid = true;
@@ -760,7 +748,7 @@ if (isset($_SESSION['user_login'])) {
         this.submit();
       }
     });
-  </script>
+  </script> -->
   <script src="../../assets/js/bootstrap.bundle.min.js"></script>
   <script src="../../assets/js/jquery.min.js"></script>
   <script src="../../assets/plugins/slick/slick.min.js"></script>
